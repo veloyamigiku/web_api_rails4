@@ -53,4 +53,8 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  # 形式(URLパターン => コントローラ名#アクション名)  
+  get 'memo/index' => 'memos#index'
+
 end
