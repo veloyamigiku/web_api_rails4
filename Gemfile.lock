@@ -49,6 +49,9 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    debase (0.2.4.1)
+      debase-ruby_core_source (>= 0.10.2)
+    debase-ruby_core_source (0.10.5)
     debug_inspector (0.0.3)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -106,6 +109,8 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     rdoc (4.3.0)
+    ruby-debug-ide (0.7.0)
+      rake (>= 0.8.1)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -152,9 +157,11 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
+  debase
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.11)
+  ruby-debug-ide
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
