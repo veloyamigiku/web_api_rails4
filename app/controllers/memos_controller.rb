@@ -5,4 +5,10 @@ class MemosController < ApplicationController
         render text: 'memo index'
     end
 
+    def list
+        @memos = Memo.all
+        # render(jsonオプション)は、画面にJSON形式のデータを出力する。
+        render json: @memos
+    end
+
 end
