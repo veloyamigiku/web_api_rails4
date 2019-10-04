@@ -57,5 +57,7 @@ Rails.application.routes.draw do
   # 形式(URLパターン => コントローラ名#アクション名)  
   get 'memo/index' => 'memos#index'
   get 'memo/list' => 'memos#list'
-  
+  get 'jwt/issue' => 'jwt#issue'
+  get 'jwt/validate' => 'jwt#validate'
+
 end

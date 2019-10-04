@@ -47,3 +47,9 @@ end
 
 gem 'ruby-debug-ide'
 gem 'debase'
+
+gem "solargraph"
+gem "rubocop"
+
+gem 'openssl'
+gem 'jwt'
