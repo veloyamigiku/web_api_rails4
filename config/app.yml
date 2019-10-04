@@ -1,0 +1,11 @@
+development:
+  private: "openssl genrsa 1024 > private"
+  public: "openssl rsa -in private -pubout -out public"
+
+test:
+  private: "openssl genrsa 1024 > private"
+  public: "openssl rsa -in private -pubout -out public"
+
+production:
+  private: "openssl genrsa 1024 > private"
+  public: "openssl rsa -in private -pubout -out public"
