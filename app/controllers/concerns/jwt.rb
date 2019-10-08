@@ -1,6 +1,9 @@
-class JwtController < ApplicationController
+module Jwt
+
+    extend ActiveSupport::Concern
 
     def issue
+
         # ペイロードを作成する。
         payload = {
             data: "test"
@@ -13,15 +16,10 @@ class JwtController < ApplicationController
         # 第3引数は、署名アルゴリズムを指定する。
         token = JWT.encode payload, rsa_private, 'RS256'
         
-        json = {
-            token: token
-        }
-        render json: json
     end
 
-    def validate
-        # クエリ文字列等でトークンを取得する。
-        token = params[:token]
+    def validate(token)
+
         # 文字列形式の秘密鍵を元に、公開鍵を取得する。
         rsa_public = (OpenSSL::PKey::RSA.new APP["private"]).public_key
         # トークンをデコード（検証）する。
@@ -35,7 +33,7 @@ class JwtController < ApplicationController
             rsa_public,
             true,
             { algorithm: 'RS256' })
-        render json: decoded
+
     end
 
 end

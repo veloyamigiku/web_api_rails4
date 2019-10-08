@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class JwtControllerTest < ActionController::TestCase
+class AuthControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

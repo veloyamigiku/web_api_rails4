@@ -1,12 +1,12 @@
 # 改行を含む文字列の場合は、[項目名: |]とする。
 development:
   private: |
-    openssl rsa -in private -pubout -out public
+    openssl genrsa
 
 test:
   private: |
-    openssl rsa -in private -pubout -out public
+    openssl genrsa
 
 production:
   private: |
-    openssl rsa -in private -pubout -out public
+    openssl genrsa
