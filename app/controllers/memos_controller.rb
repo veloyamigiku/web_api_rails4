@@ -1,8 +1,8 @@
 class MemosController < ApplicationController
 
-    before_action :authenticate
+    before_action :auth
 
-    include Jwt
+    include Auth
 
     def index
         # renderは、画面に文字列を出力する。
@@ -19,18 +19,14 @@ class MemosController < ApplicationController
     end
 
     private
-    def authenticate
-        token = request.headers["Authorization"]
-        print token + "\n"
-        begin
-            decoded = validate(token)
-        rescue => e
+    def auth
+        decoded, error = authenticate(request.headers)
+        if error != nil then
             render json: create_json(
                 nil,
-                e.class.to_s,
+                error.class.to_s + ":" + error.message,
                 false)
         end
-        print decoded
     end
 
     def create_json(memos, message, ok)

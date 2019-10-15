@@ -3,6 +3,7 @@ class AuthController < ApplicationController
     protect_from_forgery except: :login
 
     include Jwt
+    include AppHash
 
     def login
 
@@ -18,7 +19,8 @@ class AuthController < ApplicationController
         end
 
         # システムにユーザが存在することを確認する。
-        if !("root".eql?(request_user)) then
+        find_user = User.find_by(name: request_user)
+        if find_user == nil then
             render json: create_json(
                 nil,
                 "user is not found.",
@@ -27,6 +29,15 @@ class AuthController < ApplicationController
         end
 
         # ユーザパスワードのハッシュ値と、登録済みのパスワードのハッシュ値を比較する。
+        find_user_password = find_user["password"]
+        hash_user_password = hash_password(request_password)
+        if !(hash_user_password.eql?(find_user_password)) then
+            render json: create_json(
+                nil,
+                "user password is invalid.",
+                false)
+            return
+        end
 
         # トークン（JWT）を発行する。
         token = issue
