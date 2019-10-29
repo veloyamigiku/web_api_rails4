@@ -35,3 +35,7 @@ items = repositories["items"]
 items.each do |item|
     puts("id:" + item["id"].to_s + ", name:" + item["name"])
 end
+
+# JSON.generateは、JSONオブジェクトをJSON形式の文字列に変換する。
+items_json_str = JSON.generate(items)
+#puts("items_json_str:\n" + items_json_str)
