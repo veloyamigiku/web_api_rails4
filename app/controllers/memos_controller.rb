@@ -1,5 +1,7 @@
 class MemosController < ApplicationController
 
+    protect_from_forgery except: :create
+
     before_action :auth
 
     include Auth
@@ -16,6 +18,30 @@ class MemosController < ApplicationController
             @memos,
             "selected all memo.",
             true)
+    end
+
+    def create
+        memo = Memo.new(memo_params)
+
+        respond_to do |format|
+            if memo.save
+                format.json {
+                    render json: create_json(
+                        memo,
+                        "create ok",
+                        true)
+                }
+            else
+                format.json {
+                    render json: create_json(
+                        memo,
+                        memo.errors.to_s,
+                        false
+                    )
+                }
+            end
+        end
+
     end
 
     # サンプル（削除予定）
@@ -61,6 +87,12 @@ class MemosController < ApplicationController
             message: message,
             ok: ok
         }
+    end
+
+    def memo_params
+        params.require(:memo_post).permit(
+            :title,
+            :content)
     end
 
 end
