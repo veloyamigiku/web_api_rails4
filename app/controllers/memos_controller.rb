@@ -25,19 +25,31 @@ class MemosController < ApplicationController
 
         respond_to do |format|
             if memo.save
+                format.html {
+                    render text: "create ok"
+                }
                 format.json {
                     render json: create_json(
                         memo,
                         "create ok",
                         true)
                 }
+                format.jpg {
+                    render text: "mime:jpg ok"
+                }
             else
+                format.html {
+                    render text: "create ng"
+                }
                 format.json {
                     render json: create_json(
                         memo,
                         memo.errors.to_s,
                         false
                     )
+                }
+                format.jpg {
+                    render text: "mime:jpg ng"
                 }
             end
         end
