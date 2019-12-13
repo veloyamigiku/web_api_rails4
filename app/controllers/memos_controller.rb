@@ -20,10 +20,41 @@ class MemosController < ApplicationController
             true)
     end
 
+    def update
+        memo_id = params["id"].to_i
+        memo = Memo.find_by(id: memo_id)
+
+        respond_to do |format|
+            # updateは、指定の更新データ（ハッシュ）でモデルのテーブルを更新する。
+            if memo != nil && memo.update(memo_params)
+                # 更新対象のモデルが存在して、かつ更新に成功した場合の処理を定義する。
+                format.json {
+                    render json: create_json(
+                        memo,
+                        "memo update ok",
+                        true)
+                }
+            else
+                # 上記以外（更新失敗）の場合の処理を定義する。
+                format.json {
+                    render json: create_json(
+                        memo,
+                        "memo update ng",
+                        false)
+                }
+            end
+
+        end
+
+    end
+
     def create
         memo = Memo.new(memo_params)
 
+        # respond_to/format.xxxで、出力フォーマット毎の処理を定義する。
         respond_to do |format|
+            # saveは、モデルをテーブルに登録する。
+            # 登録結果を真偽値で返却する。
             if memo.save
                 format.html {
                     render text: "create ok"

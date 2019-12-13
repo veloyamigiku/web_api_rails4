@@ -57,7 +57,8 @@ Rails.application.routes.draw do
   # 形式(URLパターン => コントローラ名#アクション名)  
   get 'memo/index' => 'memos#index'
   get 'memo/list' => 'memos#list'
-  post "memo/create" => 'memos#create'
+  post 'memo/create' => 'memos#create'
+  post 'memo/update/:id' => 'memos#update'
   
   # サンプル（削除予定）
   get 'memo/find' => 'memos#find'
