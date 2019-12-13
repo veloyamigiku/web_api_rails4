@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   get 'memo/list' => 'memos#list'
   post 'memo/create' => 'memos#create'
   post 'memo/update/:id' => 'memos#update'
+  post 'memo/delete/:id' => 'memos#delete'
   
   # サンプル（削除予定）
   get 'memo/find' => 'memos#find'

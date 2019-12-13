@@ -20,6 +20,45 @@ class MemosController < ApplicationController
             true)
     end
 
+    def delete
+
+        memo_id = params["id"].to_i
+        memo = Memo.find_by(id: memo_id)
+
+        respond_to do |format|
+            if memo == nil
+                format.json {
+                    render json: create_json(
+                        memo,
+                        "delete ng",
+                        false)
+                }
+            else
+                # destroyは、モデルをテーブルから削除する。
+                # 戻り値は、
+                # 削除が成功した場合はモデルデータ。
+                # 削除が失敗した場合はfalse。
+                destory_memo = memo.destroy
+                if destory_memo
+                    format.json {
+                        render json: create_json(
+                            destory_memo,
+                            "delete ok",
+                            true)
+                    }
+                else
+                    format.json {
+                        render json: create_json(
+                            memo,
+                            "delete ng",
+                            false)
+                    }
+                end
+            end
+        end
+
+    end
+
     def update
         memo_id = params["id"].to_i
         memo = Memo.find_by(id: memo_id)
